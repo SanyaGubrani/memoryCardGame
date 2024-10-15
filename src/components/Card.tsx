@@ -3,17 +3,16 @@ import Tilt from "react-parallax-tilt";
 import backCardImage from "../assets/characters/backCardImage.jpg";
 import { Character } from "../types";
 
-type Props = {
+interface CardProps {
     character: Character;
     isFlipped: boolean;
-    handleFlip: () => void;
-    handleCardClick: () => void;
-};
+    onCardClick: () => void;
+}
 
-const Card = ({ character, isFlipped, handleCardClick, handleFlip }: Props) => {
+const Card: React.FC<CardProps> = ({ character, isFlipped, onCardClick }) => {
     return (
         <div
-            onClick={handleCardClick}
+            onClick={onCardClick}
             className="flex items-center justify-between"
         >
             <Tilt
@@ -34,10 +33,7 @@ const Card = ({ character, isFlipped, handleCardClick, handleFlip }: Props) => {
                        }`}
                 >
                     {/* Front of the Card */}
-                    <div
-                        className="absolute flex items-center justify-center backface-hidden"
-                        onClick={handleFlip}
-                    >
+                    <div className="absolute flex items-center justify-center backface-hidden">
                         <img
                             src={character.src}
                             alt={`Character ${character.id}`}
@@ -50,7 +46,7 @@ const Card = ({ character, isFlipped, handleCardClick, handleFlip }: Props) => {
                         className="absolute bg-stone-700 backface-hidden rotate-y-180 flex
                      justify-center items-center"
                     >
-                        <img src={backCardImage} className="w-56 h-72" />
+                        <img src={backCardImage} className="w-56 h-72" alt="Card Back"/>
                     </div>
                 </div>
             </Tilt>

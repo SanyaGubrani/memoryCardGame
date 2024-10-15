@@ -1,6 +1,7 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import GameHeading from "@/components/GameHeading";
-import { GAME_LEVELS } from "@/constants";
+import GameHeading from "../components/GameHeading";
+import { GAME_LEVELS } from "../constants";
 
 const HomePage: React.FC = () => {
     const buttonStyles = `text-xl md:text-3xl text-center bg-gradient-to-r
@@ -10,15 +11,12 @@ const HomePage: React.FC = () => {
                         hover:shadow-rose-500/70 hover:from-red-900/70 hover:to-stone-950/70
                         hover:scale-95 transition-all duration-300`;
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <GameHeading headingText="Memory Game" />
-            <div
-                className="w-full flex md:flex-row flex-col items-center justify-center
-             flex-wrap mt-8 md:mt-48"
-            >
+            <div className="flex flex-wrap justify-center">
                 {GAME_LEVELS.map((level) => (
                     <Link
-                        key={level.name}
+                        key={level.path}
                         to={level.path}
                         className={buttonStyles}
                     >

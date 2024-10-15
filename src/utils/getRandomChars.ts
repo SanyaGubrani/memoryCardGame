@@ -1,11 +1,6 @@
 import { Character } from "@/types";
 
-type Props = {
-    list: Character[];
-    numberOfCharacters: number;
-};
-
-const getRandomChars = ({ list, numberOfCharacters }: Props): Character[] => {
+export const getRandomChars = ( list: Character[], numberOfCharacters: number ): Character[] => {
     const chars: Character[] = [];
     while (chars.length < numberOfCharacters) {
         const randomIndex = Math.floor(Math.random() * list.length); 
@@ -18,4 +13,3 @@ const getRandomChars = ({ list, numberOfCharacters }: Props): Character[] => {
     return chars;
 };
 
-export default getRandomChars;
