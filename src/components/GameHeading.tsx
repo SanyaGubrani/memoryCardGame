@@ -2,13 +2,14 @@ import { motion } from "framer-motion";
 
 type Props = {
     headingText: string;
+    className?: string;
 };
 
-const GameHeading = ({ headingText }: Props) => {
+const GameHeading = ({ headingText, className }: Props) => {
     return (
-        <div className="w-full flex justify-center pt-8 px-5">
+        <div className={`w-full flex ${className}`}>
             <motion.div
-                className="relative md:w-1/3 py-5 px-6 bg-gradient-to-br from-red-900/80 to-yellow-900/80 rounded-lg shadow-2xl overflow-hidden"
+                className="relative py-5 px-6 bg-gradient-to-br from-red-900/80 to-yellow-900/80 rounded-lg shadow-2xl overflow-hidden"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
@@ -23,7 +24,7 @@ const GameHeading = ({ headingText }: Props) => {
                     }}
                 ></motion.div>
                 <motion.h1
-                    className="relative text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-widest font-serif text-center text-yellow-100 drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]"
+                    className="relative text-4xl md:text-5xl lg:text-6xl lg:whitespace-nowrap font-extrabold tracking-widest font-serif text-center text-yellow-100 drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]"
                     animate={{
                         textShadow: [
                             "0 0 7px #FFA500",

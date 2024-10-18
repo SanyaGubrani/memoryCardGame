@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import GameHeading from "../components/GameHeading";
 import { GAME_LEVELS } from "../constants";
+import Rules from "@/components/Rules";
 
 const HomePage: React.FC = () => {
     const buttonStyles = `text-xl md:text-3xl text-center bg-gradient-to-r
@@ -11,8 +12,8 @@ const HomePage: React.FC = () => {
                         hover:shadow-rose-500/70 hover:from-red-900/70 hover:to-stone-950/70
                         hover:scale-95 transition-all duration-300`;
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-            <GameHeading headingText="Memory Game" />
+        <div className="flex flex-col items-center justify-center gap-12 min-h-screen -mt-10 p-5">
+            <GameHeading headingText="Memory Game" className="pt-8 m-5 justify-center"/>
             <div className="flex flex-wrap justify-center">
                 {GAME_LEVELS.map((level) => (
                     <Link
@@ -23,6 +24,9 @@ const HomePage: React.FC = () => {
                         {level.name}
                     </Link>
                 ))}
+            </div>
+            <div className="flex items-start justify-start p-5 ">
+                <Rules />
             </div>
         </div>
     );

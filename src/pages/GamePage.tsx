@@ -19,7 +19,6 @@ const GamePage: React.FC = () => {
 
     return (
         <div>
-            <h1>{gameLevel.name} Level</h1>
             <MemoryGame gameLevel={gameLevel} characters={characters} />
         </div>
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface ScoreBoardProps {
     score: number;
@@ -7,23 +8,54 @@ interface ScoreBoardProps {
 
 const ScoreBoard: React.FC<ScoreBoardProps> = ({ score, bestScore }) => {
     return (
-        <div
-            className="flex flex-col items-center justify-center p-10 text-2xl font-semibold
-     text-rose-200 gap-5 tracking-wider border-4 border-rose-950/50 border-opacity-75"
+        <motion.div
+            className="w-full max-w-xs bg-gradient-to-r from-red-900/80 to-yellow-900/80 rounded-lg shadow-xl shadow-rose-400/50 p-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
         >
-            <div>
-                Score:{" "}
-                <span className="text-rose-400 tracking-wide font-bold">
-                    {score}
-                </span>
+            <div className="flex justify-between items-center">
+                <div className="text-center">
+                    <h2 className="text-2xl font-semibold text-yellow-300 mb-1">
+                        Score
+                    </h2>
+                    <motion.span
+                        key={score}
+                        className="text-3xl font-bold text-white block"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 15,
+                        }}
+                    >
+                        {score}
+                    </motion.span>
+                </div>
+
+                <div className="h-14 w-px bg-yellow-500/60 mx-2" />
+
+                <div className="text-center">
+                    <h2 className="text-2xl font-semibold text-yellow-300 mb-1">
+                        Best Score
+                    </h2>
+                    <motion.span
+                        key={bestScore}
+                        className="text-3xl font-bold text-white block"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 15,
+                        }}
+                    >
+                        {bestScore}
+                    </motion.span>
+                </div>
             </div>
-            <div>
-                Best Score:{" "}
-                <span className="text-rose-400 tracking-wide font-bold">
-                    {bestScore}
-                </span>
-            </div>
-        </div>
+        </motion.div>
     );
 };
 
