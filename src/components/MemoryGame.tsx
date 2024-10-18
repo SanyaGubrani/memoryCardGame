@@ -5,7 +5,7 @@ import ScoreBoard from "@/components/ScoreBoard";
 import Card from "@/components/Card";
 import { useMemoryGame } from "@/hooks/useMemoryGame";
 import GameHeading from "@/components/GameHeading";
-
+import Result from "./Result";
 
 interface MemoryGameProps {
     characters: Character[];
@@ -19,7 +19,14 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ characters, gameLevel }) => {
         characters: gameCharacters,
         isFlipped,
         handleCardClick,
+        gameResult,
+        handleCloseResult,
+        resetGame,
     } = useMemoryGame(characters, gameLevel);
+
+    const handlePlayAgain = () => {
+        resetGame();
+    };
 
     return (
         <div>
@@ -27,8 +34,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ characters, gameLevel }) => {
                 <div className="w-full space-y-5 gap-5 md:flex items-center justify-between p-6">
                     <Link to="/">
                         <GameHeading
-                            headingText=
-                            {`${gameLevel.name} Mode`}
+                            headingText={`${gameLevel.name} Mode`}
                             className="shadow-xl shadow-rose-400/50"
                         />
                     </Link>
@@ -43,6 +49,14 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ characters, gameLevel }) => {
                             onCardClick={() => handleCardClick(char)}
                         />
                     ))}
+                    {gameResult && (
+                        <Result
+                            isWin={gameResult.isWin}
+                            onClose={handleCloseResult}
+                            gameLevel={gameLevel.name}
+                            onPlayAgain={handlePlayAgain}
+                        />
+                    )}
                 </div>
             </div>
         </div>

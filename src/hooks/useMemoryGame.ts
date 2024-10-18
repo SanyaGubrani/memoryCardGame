@@ -11,6 +11,10 @@ export const useMemoryGame = (
     const [bestScore, setBestScore] = useState(0);
     const [characters, setCharacters] = useState<Character[]>([]);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [gameResult, setGameResult] = useState<{
+        isWin: boolean;
+        show: boolean;
+    } | null>(null);
 
     useEffect(() => {
         resetGame();
@@ -21,22 +25,22 @@ export const useMemoryGame = (
             allCharacters,
             gameLevel.numberOfCards
         );
-        setCharacters(randomChars.map((char) => ({ ...char, clicked: false }))); //card click set to false inititally or on reset
+        setCharacters(randomChars.map((char) => ({ ...char, clicked: false })));
         setScore(0);
+        setGameResult(null);
     };
 
     const handleCardClick = (clickedChar: Character) => {
         if (clickedChar.clicked) {
-            alert("you lost");
+            setGameResult({ isWin: false, show: true });
             setBestScore((prevBestScore) => Math.max(prevBestScore, score));
-            resetGame();
         } else {
             const newScore = score + 1;
             setScore(newScore);
             setCharacters((prevChars) =>
                 prevChars.map((char) =>
                     char.id === clickedChar.id
-                        ? { ...char, clicked: true } //set cards state to clicked
+                        ? { ...char, clicked: true }
                         : char
                 )
             );
@@ -48,13 +52,17 @@ export const useMemoryGame = (
             }, 1000);
 
             if (newScore === gameLevel.numberOfCards) {
-                alert("you win");
+                setGameResult({ isWin: true, show: true });
                 setBestScore((prevBestScore) =>
                     Math.max(prevBestScore, newScore)
                 );
-                resetGame();
             }
         }
+    };
+
+    const handleCloseResult = () => {
+        setGameResult(null);
+        resetGame();
     };
 
     return {
@@ -63,5 +71,8 @@ export const useMemoryGame = (
         characters,
         isFlipped,
         handleCardClick,
+        gameResult,
+        handleCloseResult,
+        resetGame,
     };
 };

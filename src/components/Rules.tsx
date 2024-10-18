@@ -40,10 +40,7 @@ export default function Rules() {
                         className="mt-2 p-5 w-72 bg-gradient-to-br from-red-600/50 to-yellow-600/60 rounded-lg shadow-lg"
                     >
                         <h3 className="text-xl text-start font-semibold text-white">
-                            Do not click on a card twiceDiscrete Probability and Counting Principles
-
-
-.
+                            Do not click on a card twice
                         </h3>
                     </motion.div>
                 )}
