@@ -9,7 +9,7 @@ import img7 from "./assets/characters/img7.jpg";
 import img8 from "./assets/characters/img8.jpg";
 import img9 from "./assets/characters/img9.jpg";
 import img10 from "./assets/characters/img10.jpg";
-import { Character } from "./types";
+import { Character } from "@/types";
 
 const characters: Character[] = [
     {
