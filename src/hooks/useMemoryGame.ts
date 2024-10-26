@@ -15,6 +15,7 @@ export const useMemoryGame = (
         isWin: boolean;
         show: boolean;
     } | null>(null);
+    const [isFirstPlay, setIsFirstPlay] = useState(true);
 
     useEffect(() => {
         resetGame();
@@ -33,10 +34,15 @@ export const useMemoryGame = (
     const handleCardClick = (clickedChar: Character) => {
         if (clickedChar.clicked) {
             setGameResult({ isWin: false, show: true });
-            setBestScore((prevBestScore) => Math.max(prevBestScore, score));
+            setIsFirstPlay(false);
         } else {
             const newScore = score + 1;
             setScore(newScore);
+            
+            if (isFirstPlay || newScore > bestScore) {
+                setBestScore(newScore);
+            }
+            
             setCharacters((prevChars) =>
                 prevChars.map((char) =>
                     char.id === clickedChar.id
@@ -53,9 +59,7 @@ export const useMemoryGame = (
 
             if (newScore === gameLevel.numberOfCards) {
                 setGameResult({ isWin: true, show: true });
-                setBestScore((prevBestScore) =>
-                    Math.max(prevBestScore, newScore)
-                );
+                setIsFirstPlay(false);
             }
         }
     };
