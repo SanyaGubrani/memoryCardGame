@@ -1,17 +1,21 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { HelpCircle } from "lucide-react";
+"use client";
 
-export default function Rules() {
+import { useState, useRef, useEffect } from "react";
+import { CircleHelpIcon } from "lucide-react";
+
+export default function SimplePopup() {
     const [isOpen, setIsOpen] = useState(false);
-    const popoutRef = useRef(null);
+    const popupRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        function handleClickOutside(event) {
-            if (popoutRef.current && !popoutRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                popupRef.current &&
+                !popupRef.current.contains(event.target as Node)
+            ) {
                 setIsOpen(false);
             }
-        }
+        };
 
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -20,31 +24,28 @@ export default function Rules() {
     }, []);
 
     return (
-        <div className="inline-block">
+        <div className="relative inline-block">
             <button
-                className="text-2xl font-medium bg-gradient-to-r from-red-500/60 to-yellow-500/60 text-rose-100 border-none hover:from-red-800 hover:to-yellow-700 px-5 py-2 rounded-2xl shadow-lg shadow-rose-700 flex items-center justify-center"
                 onClick={() => setIsOpen(!isOpen)}
+                className="py-2 px-4 flex items-center justify-center gap-2 bg-yellow-500/70 rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
             >
-                <HelpCircle className="size-6 mr-2" />
-                How to Play
+                <h1 className="text-lg md:text-xl tracking-wide font-semibold text-white">How to play</h1>
+                <CircleHelpIcon className="size-7 md:size-10 text-rose-100" />
             </button>
 
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        ref={popoutRef}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="mt-2 p-5 w-72 bg-gradient-to-br from-red-600/50 to-yellow-600/60 rounded-lg shadow-lg"
-                    >
-                        <h3 className="text-xl text-start font-semibold text-white">
-                            Do not click on a card twice
-                        </h3>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {isOpen && (
+                <div
+                    ref={popupRef}
+                    className="popup absolute z-10 m-2 p-2 md:p-3 bg-white/90 border-4 border-rose-200 rounded-lg shadow-lg"
+                >
+                    <h2 className="text-base font-semibold text-red-600 mb-1">
+                        Memory Check
+                    </h2>
+                    <p className="text-sm leading-tight md:leading-relaxed font-medium text-stone-800">
+                        Make sure you don't click on a card TWICE.{" "}
+                    </p>
+                </div>
+            )}
         </div>
     );
 }

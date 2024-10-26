@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 
 type Props = {
-    headingText: string;
+    headingText: React.ReactNode;
     className?: string;
 };
 
 const GameHeading = ({ headingText, className }: Props) => {
     return (
-        <div className={`w-full flex ${className}`}>
+        <div className={`w-full flex justify-center ${className}`}>
             <motion.div
-                className="relative py-5 px-6 bg-gradient-to-br from-red-900/80 to-yellow-900/80 rounded-lg shadow-2xl overflow-hidden"
+                className="w-auto relative py-5 px-6 bg-gradient-to-br from-red-900/80 to-yellow-900/80 rounded-lg shadow-2xl overflow-hidden"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}

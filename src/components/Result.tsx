@@ -1,4 +1,3 @@
-import React from "react";
 import { X, ArrowLeft, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -13,7 +12,6 @@ export default function Result({
     isWin = true,
     onClose,
     onPlayAgain,
-    gameLevel,
 }: ResultProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4">
